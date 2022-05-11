@@ -1,3 +1,11 @@
+  // "eslintConfig": {
+  //   "extends": [
+  //     "react-app",
+  //     "react-app/jest"
+  //   ]
+  // },
+
+
 # lib-auth
 
 > Made with create-react-library
