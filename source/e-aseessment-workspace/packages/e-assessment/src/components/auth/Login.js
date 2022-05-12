@@ -22,7 +22,7 @@ export default function Login() {
         e.preventDefault();
         console.log(new Date());
         setFormErrors(validate(formValues));
-        console.log("#########################");
+        console.log("#########################");  
         console.log(vDoAuth(formValues));
         //nav("/landing");
     }

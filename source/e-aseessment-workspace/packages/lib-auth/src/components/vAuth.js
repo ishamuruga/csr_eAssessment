@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../config';
 
 const vDoAuth = (auth)=> {    
-    
+    console.log("****");
     const headers = { 
         'Authorization': 'Bearer my-token',
         'My-Custom-Header': 'foobar'
@@ -13,6 +13,9 @@ const vDoAuth = (auth)=> {
         "password" : auth.password
     };
 
+       
+    return await axios.post(config.url + config.auth, user,{ headers });
+
     // axios.post(config.url + config.auth, 
     //                 user, 
     //                 { headers })
@@ -22,7 +25,7 @@ const vDoAuth = (auth)=> {
     //                    sessionStorage.setItem("auth",JSON.stringify(x.data));
     //                });   
 
-    return await axios.post(config.url + config.auth, user,{ headers });
+    
 
 }
 
