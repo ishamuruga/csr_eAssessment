@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "e-v-assessment-app": "apps/e-v-assessment-app",
+    "e-v-assessment-app-e2e": "apps/e-v-assessment-app-e2e",
+    "lib-auth": "libs/lib-auth"
+  }
+}

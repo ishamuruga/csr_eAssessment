@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../config';
 
-const vDoAuth = (auth)=> {    
+const vDoAuth = (auth:any)=> {    
     console.log("****!*");
     const headers = { 
         'Authorization': 'Bearer my-token',
@@ -26,4 +26,4 @@ const vDoAuth = (auth)=> {
     //                });   
 }
 
-export default vDoAuth;
+export default vDoAuth; 
