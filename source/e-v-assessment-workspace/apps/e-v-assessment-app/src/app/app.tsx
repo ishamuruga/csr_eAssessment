@@ -7,7 +7,7 @@ import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Login from './components/auth/login';
 import Landing from './components/modules/landing/landing';
 
-import {Navbar} from '@e-v-assessment-workspace/lib-auth';
+import {Dashboard} from '@e-v-assessment-workspace/lib-auth';
 
 export function App() {
   return (
@@ -21,11 +21,11 @@ export function App() {
             <Link to="/landing">Landing</Link>
           </li>
         </ul> */}
-        <Navbar></Navbar>
-        <Routes>
+        <Dashboard></Dashboard>
+        {/* <Routes>
           <Route path='/' element={<Login/>}></Route>
           <Route path='/landing' element={<Landing/>}></Route>
-        </Routes>
+        </Routes> */}
       </Router>
     </div>
   );
