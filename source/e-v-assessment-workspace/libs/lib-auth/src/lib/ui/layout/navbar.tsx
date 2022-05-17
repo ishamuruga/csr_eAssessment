@@ -1,7 +1,21 @@
 import react from 'react';
 import $ from 'jquery';
+import React,{useState} from 'react'
+import { faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = () => {
+interface menuflag {
+  id:string;
+  flag:boolean;
+}
+
+const Navbar = (props:any) => {
+
+  const flags:menuflag[]=[
+    {id:"abcd123",flag:false},
+    {id:"abcd124",flag:false}
+  ];
+  
+  const [status,setStatus] = useState(flags);
 
   const handleCloseSideBar = () => {
     $(".page-wrapper").removeClass("toggled");
@@ -12,8 +26,28 @@ const Navbar = () => {
   }
 
   const handleMenuDisplay = (e:any) => {
+    //console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    //console.log(status)
     console.log(new Date());
-    console.log(e);
+    
+    const name = e;
+    console.log(name);
+
+    status.map((x:menuflag)=>{
+      console.log(x);
+      if (x.id===name){
+        if (x.flag){
+          $("#" + name).slideUp(200);    
+        } else {
+          $("#" + name).slideDown(200);    
+        }
+        x.flag = !x.flag
+      }
+      return x;
+    })
+
+    
+
     $(".sidebar-dropdown").addClass("active");
     $("#abcd").slideDown(200);
     //$(".sidebar-submenu").slideDown(200);
@@ -46,7 +80,7 @@ const Navbar = () => {
           </div>
           <div className="sidebar-header">
             <div className="user-pic">
-              <img className="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+              <img className="img-responsive img-rounded" src="https://icon-library.com/images/icon-user/icon-user-6.jpg"
                 alt="User picture"/>
             </div>
             <div className="user-info">
@@ -77,13 +111,35 @@ const Navbar = () => {
               <li className="header-menu">
                 <span>General</span>
               </li>
-              <li className="sidebar-dropdown" id="abcd" data-key="abcd" onClick={handleMenuDisplay}>
-                <a href="#">
+              <li className="sidebar-dropdown">
+                <a href="#" onClick={()=>handleMenuDisplay('abcd123')}>
                   <i className="fa fa-tachometer-alt"></i>
                   <span>Dashboard</span>
                   <span className="badge badge-pill badge-warning">New</span>
                 </a>
-                <div id="abcd" className="sidebar-submenu">
+                <div id="abcd123" className="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="#">Dashboard 1
+                        <span className="badge badge-pill badge-success">Pro</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Dashboard 2</a>
+                    </li>
+                    <li>
+                      <a href="#">Dashboard 3</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="sidebar-dropdown">
+                <a href="#" onClick={()=>handleMenuDisplay('abcd124')}>
+                  <i className="fa fa-shopping-cart"></i>
+                  <span>Dashboard2</span>
+                  <span className="badge badge-pill badge-warning">New</span>
+                </a>
+                <div id="abcd124" className="sidebar-submenu">
                   <ul>
                     <li>
                       <a href="#">Dashboard 1
