@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './login.css';
 import {useNavigate} from 'react-router-dom'
-import { vDoAuth } from '@e-v-assessment-workspace/lib-auth';
+import { vDoAuth,QueueManager,EventType,TestUser } from '@e-v-assessment-workspace/lib-auth';
 
 interface usermodel {
     email:string;
@@ -28,19 +28,41 @@ export default function Login() {
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
+        console.log(valid)
         console.log(new Date());
-        setFormErrors(validate(formValues));
+        //setFormErrors(validate(formValues));
         console.log("///////////////////////");
-        
-        if (!valid){
-            return;
-        }
+        console.log(validate(formValues));
+        console.log(valid);
 
-        vDoAuth(formValues).then(x=>{
+        if (!validate(formValues)){
+            return;
+        } 
+        //else {
+        //    nav("/dashboard");  
+        //}
+        //console.log("=========================================after return");
+        //nav("/landing");
+        
+
+        vDoAuth(formValues).then((x:any)=>{
             console.log("================================");  
             console.log(x);
+            console.log(x.data.firstName + "," + x.data.lastName);
+            const tUser:TestUser = new TestUser();
+            
+            tUser.id = x.data.id;
+            tUser.firstName = x.data.firstName;
+            tUser.lastName =  x.data.lastName;
+            tUser.ts = new Date();
+            tUser.userid = x.data.username;
+            tUser.url = "https://static.thenounproject.com/png/1173160-200.png";
+            tUser.url = "https://blogger.googleusercontent.com/img/a/AVvXsEidaeuNDRQSzS4ssWbr5VZs2_rwFixI-_7kI97CFLXnfL5Isv8isAIQyR58dW5sOQxoZv3hRmzjB3xY4pRi9x9-XzjVTl9sdHEiMFl3ksSWZmHOU9wdQvAc7oz-wpK7gicIQMLla3JUm_XnyJBRyh9HPfmNLAX3079P2EHCOruacl4y9sLySkhkNVhPfg=s320";
+            
+            QueueManager.sendMessage(tUser,EventType.LOGIN_OK.toString());
+
             sessionStorage.setItem("auth",JSON.stringify(x));
-            nav("/landing");
+            nav("/dashboard");
         });
     }
 
@@ -74,8 +96,9 @@ export default function Login() {
 
         if (Object.keys(errors).length>0) {
             setValid(false);
+            return false;
         }
-        return errors;
+        return true;
       };
   return (
     <div>

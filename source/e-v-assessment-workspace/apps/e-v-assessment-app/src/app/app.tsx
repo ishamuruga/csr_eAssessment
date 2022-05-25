@@ -1,15 +1,25 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
-//import NxWelcome from './nx-welcome';
-//import {LibAuth} from '@e-v-assessment-workspace/lib-auth';
-
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Login from './components/auth/login';
 import Landing from './components/modules/landing/landing';
 
-import {Dashboard} from '@e-v-assessment-workspace/lib-auth';
+import { useEffect,useState } from 'react';
+import Dashboard from './components/layout/dashboard';
+
 
 export function App() {
+
+ // const [status,setStatus] = useState(false);
+
+  // useEffect(()=>{
+  //   console.log("I am frim use effect-1"+ new Date());
+  // },[])
+
+  // useEffect(()=>{
+  //   console.log("I am frim use effect-2"+ new Date());
+  // })
+
   return (
 <div>
       <Router>
@@ -21,11 +31,11 @@ export function App() {
             <Link to="/landing">Landing</Link>
           </li>
         </ul> */}
-        <Dashboard></Dashboard>
-        {/* <Routes>
+        <Routes>
           <Route path='/' element={<Login/>}></Route>
-          <Route path='/landing' element={<Landing/>}></Route>
-        </Routes> */}
+          {/* <Route path='/landing' element={<Landing/>}></Route> */}
+          <Route path='/dashboard' element={<Dashboard/>}></Route>
+        </Routes>
       </Router>
     </div>
   );

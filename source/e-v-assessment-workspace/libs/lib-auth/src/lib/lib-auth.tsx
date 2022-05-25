@@ -1,8 +1,9 @@
 import styles from './lib-auth.module.css';
 import vDoAuth from './auth/vAuth';
 
-import Navbar from './ui/layout/navbar';
-import Dashboard from './ui/layout/dashboard';
+import QueueManager from './message/queuemanager';
+import EventType from './message/eventtype';
+import TestUser from './model/testuser';
 
 /* eslint-disable-next-line */
 export interface LibAuthProps {}
@@ -15,4 +16,4 @@ function LibAuth(props: LibAuthProps) {
   );
 }
 
-export {LibAuth,vDoAuth,Navbar,Dashboard};
+export {LibAuth,vDoAuth,QueueManager,EventType,TestUser};
