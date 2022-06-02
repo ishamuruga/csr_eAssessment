@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import './login.css';
 import {useNavigate} from 'react-router-dom'
 import { vDoAuth,QueueManager,EventType,TestUser } from '@e-v-assessment-workspace/lib-auth';
@@ -25,6 +25,10 @@ export default function Login() {
     });
     const [valid,setValid] = useState(true);
     const nav = useNavigate();
+
+    useEffect(()=>{
+        sessionStorage.clear();
+    })
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();

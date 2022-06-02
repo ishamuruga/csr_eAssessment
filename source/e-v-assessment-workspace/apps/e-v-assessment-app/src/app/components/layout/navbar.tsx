@@ -1,7 +1,7 @@
 import react from 'react';
 import $ from 'jquery';
 import React,{useState,useEffect} from 'react'
-import { faCloudDownloadAlt, faCropSimple } from '@fortawesome/free-solid-svg-icons';
+import { faCloudDownloadAlt, faCropSimple, faFistRaised } from '@fortawesome/free-solid-svg-icons';
 import menu_data from './data';
 import {QueueManager,EventType} from '@e-v-assessment-workspace/lib-auth';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
@@ -105,6 +105,16 @@ const Navbar = (props:any) => {
     // } 
   }
 
+  const handleSubMenuClick = (data:any) => {
+    console.log("Event Raised" + data);
+    QueueManager.sendMessage(
+      {
+        loc:data
+      },
+      EventType.SUB_MENU_REDIRECT
+      );
+  }
+
   return (
     <div>
       <a id="show-sidebar" onClick={handleOpenSideBar} className="btn btn-sm btn-dark" href="#">
@@ -166,8 +176,9 @@ const Navbar = (props:any) => {
                           x.subMemu.map((sm:any)=>{
                             return (
                               <li key={sm.id}>
-                                <Link to="/landing">Landing</Link>
-                                <a href="#">{sm.label}
+                                {/* <Link to="/landing">Landing</Link> */}
+                                {/* <div onClick={()=> handleSubMenuClick(x.url)}>CLick HEre Loose</div> */}
+                                <a onClick={()=> handleSubMenuClick(sm.url)}>{sm.label}
                                 <span className="badge badge-pill badge-success">Pro</span>
                                 </a>
                               </li>        

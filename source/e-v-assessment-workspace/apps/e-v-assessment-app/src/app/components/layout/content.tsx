@@ -1,9 +1,24 @@
-import React from 'react';
+import { EventType, QueueManager } from '@e-v-assessment-workspace/lib-auth';
+import { userInfo } from 'os';
+import React,{useEffect} from 'react';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Landing from '../modules/landing/landing';
+import {useNavigate} from 'react-router-dom'
 
 
 export default function Content() {
+  const nav = useNavigate();
+
+  useEffect(()=>{
+    QueueManager.receiveMessage().subscribe((x:any)=>{
+      if (x.event===EventType.SUB_MENU_REDIRECT){
+        console.log("redirect received..." + x);
+        console.log(x.payload.loc);
+        nav(x.payload.loc);
+      }
+    })
+  },[])
+
   return (
       <main className="page-content">
         <Routes>

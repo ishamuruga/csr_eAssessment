@@ -6,9 +6,9 @@ const menu_data:any = [
         icon:"",
         flag:false,
         subMemu : [
-            {id:1,label:"sm1"},
-            {id:2,label:"sm2"},
-            {id:3,label:"sm3"},
+            {id:1,label:"landing",url:"/landing"},
+            {id:2,label:"sm2",url:"/landing2"},
+            {id:3,label:"sm3",url:"/landing3"},
         ]
     },
     {
