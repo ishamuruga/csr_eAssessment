@@ -30,17 +30,17 @@ const Navbar = (props:any) => {
     url:""
   });
 
-  // useEffect(()=>{
-  //   console.log("================Navbar..."); 
-  //   QueueManager.receiveMessage().subscribe((x:any)=>{
-  //     console.log("!=!+!+!+!+!+!+!+!+!+");
-  //     console.log(x);
-  //     if (x.event === EventType.LOGIN_OK) {
-  //       setTUser(x.payload);
-  //     }
-  //     console.log("Data Setting...============")
-  //   })
-  // })
+  useEffect(()=>{
+     console.log("================Navbar..."); 
+     QueueManager.receiveMessage().subscribe((x:any)=>{
+       console.log("!=!+!+!+!+!+!+!+!+!+");
+       console.log(x);
+       if (x.event === EventType.LOGIN_OK) {
+         setTUser(x.payload);
+       }
+       console.log("Data Setting...============")
+     })
+   })
 
   const handleCloseSideBar = () => {
     $(".page-wrapper").removeClass("toggled");
@@ -51,8 +51,6 @@ const Navbar = (props:any) => {
   }
 
   const handleNewMenuDisplay = (data:string) => {
-    alert("======");
-    console.log(data);
     const name = data;
      menus.map((x:any)=>{
        console.log(x.key + "," + x)
