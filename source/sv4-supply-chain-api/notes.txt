@@ -1,0 +1,23 @@
+https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication/tree/master/src/main/java/com/bezkoder/springjwt
+
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+1)
+http://localhost:8080/api/auth/signup
+
+{
+  "username":"rajk",
+  "password":"rajk12345",
+  "email":"abcd@yahoo.co.in",
+  "role" : ["USER"] 
+}
+
+2)
+http://localhost:8080/api/auth/signin
+
+{
+  "username":"rajk",
+  "password":"rajk12345"
+}
