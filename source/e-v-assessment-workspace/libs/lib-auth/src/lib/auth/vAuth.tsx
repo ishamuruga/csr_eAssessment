@@ -5,7 +5,8 @@ const vDoAuth = (auth:any)=> {
     console.log("****!*");
     const headers = { 
         'Authorization': 'Bearer my-token',
-        'My-Custom-Header': 'foobar'
+        'My-Custom-Header': 'foobar',
+        "Content-Type" : "application/json"
     };
 
     const user = {
@@ -14,8 +15,9 @@ const vDoAuth = (auth:any)=> {
     };
 
        
-    return axios.post(config.url + config.auth, user,{ headers });
+    //return axios.post(config.url + config.auth, user,{ headers });
 
+    return axios.post(config.url + config.auth, user,{ headers });
     // axios.post(config.url + config.auth, 
     //                 user, 
     //                 { headers })

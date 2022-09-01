@@ -10,11 +10,11 @@ interface usermodel {
 }
 
 
-export default function Login() {
+export default function Login() {let vFlag = true;
 
     const initialValues:usermodel = {
-        email:"raj@gmail.com",
-        password:"raj12345",
+        email:"rajk",
+        password:"rajk12345",
         rflag:false
     }
 
@@ -29,7 +29,14 @@ export default function Login() {
     const handleSubmit = (e:any)=>{
         e.preventDefault();
         console.log(new Date());
-        setFormErrors(validate(formValues));
+        // eslint-disable-next-line prefer-const
+        let errs = validate(formValues);
+        setFormErrors(errs);
+
+        if (Object.keys(errs).length>0) {
+           console.log("Validation Failed.....")
+           return;
+        }
         console.log("///////////////////////");
         
         if (!valid){
@@ -62,9 +69,9 @@ export default function Login() {
     
         if (!values.email) {
           errors.email = "Cannot be blank";
-        } else if (!regex.test(values.email)) {
-          errors.email = "Invalid email format";
-        }
+        } //else if (!regex.test(values.email)) {
+          //errors.email = "Invalid email format";
+        //}
     
         if (!values.password) {
           errors.password = "Cannot be blank";
@@ -90,7 +97,7 @@ export default function Login() {
                             <div className="card-body py-5 px-md-5">
                                 <form onSubmit={handleSubmit} noValidate>
                                     <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="form2Example1">Email address</label>
+                                    <label className="form-label" htmlFor="form2Example1">User Name</label>
                                         <input 
                                             type="email" 
                                             name="email" 
