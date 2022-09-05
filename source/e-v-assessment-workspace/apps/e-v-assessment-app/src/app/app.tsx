@@ -18,6 +18,7 @@ import { Navbar } from '@e-v-assessment-workspace/lib-auth';
 // import '@fortawesome/free-solid-svg-icons';
 
 import 'font-awesome/css/font-awesome.min.css';
+import AddCecData from './components/modules/cec/add-cec-data';
 
 export function App() {
   return (
@@ -40,6 +41,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Login />}></Route>
           <Route path="/landing" element={<Landing />}></Route>
+          <Route path="/addcec" element={<AddCecData />}></Route>
         </Routes>
       </Router>
     </div>

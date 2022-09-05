@@ -1,11 +1,12 @@
 import react, { CSSProperties, useEffect, useState } from 'react';
-import { Message, MessageService,fetch } from '../../lib-auth';
+import { Message, MessageService, fetch } from '../../lib-auth';
 import './navbar.css';
 import icn from './icon.webp';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [state, setState] = useState(false);
-  const [menu,setMenu] = useState<any[]>([]);
+  const [menu, setMenu] = useState<any[]>([]);
 
   const min_width_225_styl: CSSProperties = {
     minWidth: '225px',
@@ -14,6 +15,7 @@ const Navbar = () => {
   const marging_top_58_styl: CSSProperties = {
     marginTop: '58px',
   };
+  const nav = useNavigate();
 
   useEffect(() => {
     MessageService.receiveMessage().subscribe((x: any) => {
@@ -30,11 +32,20 @@ const Navbar = () => {
     });
   });
 
-  const menuClick = (val:string)=>{
-    const d:any[]  = fetch(val);
+  useEffect(() => {
+    menuClick('cec');
+  }, []);
+
+  const menuClick = (val: string) => {
+    if (val == 'logout') {
+      nav('/');
+      return;
+    }
+
+    const d: any[] = fetch(val);
     setMenu(d);
     console.log(d);
-  }
+  };
 
   return (
     <>
@@ -47,21 +58,14 @@ const Navbar = () => {
           >
             <div className="position-sticky">
               <div className="list-group list-group-flush mx-3 mt-4">
-                {
-                   menu.map((x:any)=>{
-                     return (
-                      <a
-                  href={x.loc}
-                  className="list-group-item list-group-item-action py-2 ripple"
-                  aria-current="true"
-                >
-                  <i className="fa fa-rss fa-fw me-3"></i>
-                  <span>{x.name}</span>
-                </a>
-                     )
-                   }) 
-                }
-                
+                {menu.map((x: any) => {
+                  return (
+                    <Link to={x.loc} className="list-group-item list-group-item-action py-2 ripple">
+                      <i className="fa fa-rss fa-fw me-3"></i>
+                      <span>{x.name}</span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </nav>
@@ -74,14 +78,14 @@ const Navbar = () => {
             className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
           >
             <a className="navbar-brand container-fluid" href="#">
-                <img
-                  src={icn}
-                  width="100"
-                  height="25"
-                  alt="MDB Logo"
-                  loading="lazy"
-                /> 
-              </a>
+              <img
+                src={icn}
+                width="100"
+                height="25"
+                alt="MDB Logo"
+                loading="lazy"
+              />
+            </a>
             <button
               className="navbar-toggler"
               type="button"
@@ -98,26 +102,23 @@ const Navbar = () => {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto">
-                <li className="nav-item active" onClick={()=>menuClick('cec')}>
+                <li
+                  className="nav-item active"
+                  onClick={() => menuClick('cec')}
+                >
                   <a className="nav-link">
                     CeC <span className="sr-only">(current)</span>
                   </a>
                 </li>
-                <li className="nav-item" onClick={()=>menuClick('t4')}>
-                  <a className="nav-link" href="#">
-                    T4
-                  </a>
+                <li className="nav-item" onClick={() => menuClick('t4')}>
+                  <a className="nav-link">T4</a>
                 </li>
-                <li className="nav-item" onClick={()=>menuClick('metrics')}>
-                  <a className="nav-link" href="#">
-                    Metrics
-                  </a>
+                <li className="nav-item" onClick={() => menuClick('metrics')}>
+                  <a className="nav-link">Metrics</a>
                 </li>
-                
-                <li className="nav-item">
-                  <a className="nav-link disabled" href="#">
-                    Logout
-                  </a>
+
+                <li className="nav-item" onClick={() => menuClick('logout')}>
+                  <a className="nav-link disabled">Logout</a>
                 </li>
               </ul>
             </div>
