@@ -1,7 +1,8 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './login.css';
 import {useNavigate} from 'react-router-dom'
 import { vDoAuth } from '@e-v-assessment-workspace/lib-auth';
+import { MessageService } from '@e-v-assessment-workspace/lib-auth';
 
 interface usermodel {
     email:string;
@@ -10,7 +11,13 @@ interface usermodel {
 }
 
 
-export default function Login() {let vFlag = true;
+export default function Login() {
+    
+    let vFlag = true;
+
+    useEffect(()=>{
+        MessageService.clearMessage();
+    })
 
     const initialValues:usermodel = {
         email:"rajk",
@@ -47,6 +54,17 @@ export default function Login() {let vFlag = true;
             console.log("================================");  
             console.log(x);
             sessionStorage.setItem("auth",JSON.stringify(x));
+
+            MessageService.sendMessage(
+                {
+                    event:"LOGIN_SUCESS",
+                    payload:{
+                        status:true
+                    },
+                    ts:new Date()
+                }
+            );
+
             nav("/landing");
         });
     }
@@ -86,6 +104,7 @@ export default function Login() {let vFlag = true;
       };
   return (
     <div>
+        
         <section className=" text-center text-lg-start">
                 <div className="card mb-3">
                     <div className="row g-0 d-flex align-items-center">

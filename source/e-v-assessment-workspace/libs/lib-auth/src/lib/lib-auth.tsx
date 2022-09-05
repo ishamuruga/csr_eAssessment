@@ -2,6 +2,9 @@ import styles from './lib-auth.module.css';
 import vDoAuth from './auth/vAuth';
 
 import Navbar from './ui/layout/navbar';
+import fetch from './ui/layout/navbar-data';
+import Message from './common/message/vdata-message';
+import MessageService from './common/message/vdata-send-receive';
 
 /* eslint-disable-next-line */
 export interface LibAuthProps {}
@@ -14,4 +17,4 @@ function LibAuth(props: LibAuthProps) {
   );
 }
 
-export {LibAuth,vDoAuth,Navbar};
+export {LibAuth,vDoAuth,Navbar,Message,MessageService,fetch};

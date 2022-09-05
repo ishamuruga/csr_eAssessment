@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  /* background-color: #fbfbfb; */
+  background-color: red;
+}
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
+  }
+}
