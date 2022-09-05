@@ -13,7 +13,7 @@ export default function AddCecData() {
             <code>main &gt; .container</code>.
           </p>
           <p>
-            Back to{' '}
+            Back to{' '}  
             <a href="/docs/4.3/examples/sticky-footer/">
               the default sticky footer
             </a>{' '}
