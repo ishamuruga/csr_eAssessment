@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../config';
 
 const vDoAuth = (auth:any)=> {    
-    console.log("****!*");
+    //console.log("****!*");
     const headers = { 
         'Authorization': 'Bearer my-token',
         'My-Custom-Header': 'foobar',

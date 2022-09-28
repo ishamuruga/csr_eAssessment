@@ -1,8 +1,6 @@
-import react, { CSSProperties, useEffect, useState } from 'react';
-import { Message, MessageService, fetch } from '../../lib-auth';
-import './navbar.css';
-import icn from './icon.webp';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { CSSProperties, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MessageService, fetch } from '../../lib-auth';
 
 const Navbar = () => {
   const [state, setState] = useState(false);
@@ -17,20 +15,20 @@ const Navbar = () => {
   };
   const nav = useNavigate();
 
-  useEffect(() => {
-    MessageService.receiveMessage().subscribe((x: any) => {
-      console.log('====================');
-      if (x.data) {
-        const event = x.data.event;
-        if (event == 'LOGIN_SUCESS') {
-          setState(true);
-        }
-      } else {
-        setState(false);
-      }
-      console.log(x);
-    });
-  });
+  // useEffect(() => {
+  //   MessageService.receiveMessage().subscribe((x: any) => {
+  //     console.log('====================');
+  //     if (x.data) {
+  //       const event = x.data.event;
+  //       if (event == 'LOGIN_SUCESS') {
+  //         setState(true);
+  //       }
+  //     } else {
+  //       setState(false);
+  //     }
+  //     console.log(x);
+  //   });
+  // });
 
   useEffect(() => {
     menuClick('cec');
@@ -42,186 +40,56 @@ const Navbar = () => {
       return;
     }
 
-    const d: any[] = fetch(val);
-    setMenu(d);
-    console.log(d);
+    MessageService.sendMessage({
+      event: 'MENU_CLICK_'+val.toUpperCase(),
+      payload: {
+        status: true,
+        smenu: fetch(val)
+      },
+      ts: new Date(),
+    });
+
+    //const d: any[] = fetch(val);
+    //console.log(d);
+    //setMenu(d); 
+    //console.log(d);
   };
 
   return (
-    <>
-      <header>
-        {/* Side bar */}
-        {state && (
-          <nav
-            id="sidebarMenu"
-            className="collapse d-lg-block sidebar collapse bg-white"
-          >
-            <div className="position-sticky">
-              <div className="list-group list-group-flush mx-3 mt-4">
-                {menu.map((x: any) => {
-                  return (
-                    <Link to={x.loc} className="list-group-item list-group-item-action py-2 ripple">
-                      <i className="fa fa-rss fa-fw me-3"></i>
-                      <span>{x.name}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </nav>
-        )}
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <a className="navbar-brand" href="#">
+          Cnl Portal
+        </a>
 
-        {/* Top header */}
-        {state && (
-          <nav
-            id="main-navbar"
-            className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
-          >
-            <a className="navbar-brand container-fluid" href="#">
-              <img
-                src={icn}
-                width="100"
-                height="25"
-                alt="MDB Logo"
-                loading="lazy"
-              />
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="navbar-collapse collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto">
-                <li
-                  className="nav-item active"
-                  onClick={() => menuClick('cec')}
-                >
-                  <a className="nav-link">
-                    CeC <span className="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li className="nav-item" onClick={() => menuClick('t4')}>
-                  <a className="nav-link">T4</a>
-                </li>
-                <li className="nav-item" onClick={() => menuClick('metrics')}>
-                  <a className="nav-link">Metrics</a>
-                </li>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item active">
+              <a className="custom nav-link" onClick={()=>menuClick('cec')}>
+                CEC <span className="sr-only">(current)</span>
+              </a>
+            </li>
 
-                <li className="nav-item" onClick={() => menuClick('logout')}>
-                  <a className="nav-link disabled">Logout</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        )}
-      </header>
-      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            T4 Supply Chain Portal
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link disabled"
-                  href="#"
-                  tabIndex={-1}
-                  aria-disabled="true"
-                >
-                  Disabled
-                </a>
-              </li>
-            </ul>
-            <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
+            <li className="nav-item">
+              <a className="custom nav-link"  onClick={()=>menuClick('t4')}>
+                T4 Track <span className="sr-only">(current)</span>
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a className="custom nav-link"  onClick={()=>menuClick('metrics')}>
+                Metrics <span className="sr-only">(current)</span>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="custom nav-link"  onClick={()=>menuClick('logout')}>
+                Logout <span className="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
         </div>
-      </nav> */}
-    </>
-    // <div>
-    //   <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    //     <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">My EAssessment</a>
-    //       <ul className="navbar-nav px-3">
-    //         <li className="nav-item text-nowrap">
-    //           <a className="nav-link" href="#">Sign out</a>
-    //         </li>
-    //       </ul>
-    //   </nav>
-    // </div>
+      </nav>
+    </div>
   );
 };
-
 export default Navbar;

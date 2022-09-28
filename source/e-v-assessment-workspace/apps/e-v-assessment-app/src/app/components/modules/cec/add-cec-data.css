@@ -1,0 +1,48 @@
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: grey;
+}
+.divtext {
+    color:blueviolet
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.jumbotron {   
+    /* padding-top: 25px;  */
+    /* padding-bottom:1px; */
+    background-color: white;
+    /* background-size: cover; */
+    /* height:250px; */
+    padding: 20px 20px 20px 20px;
+    display: inline-block;
+ }
+
+ .card-columns {
+    @include media-breakpoint-only(lg) {
+      column-count: 2;
+    }
+    @include media-breakpoint-only(xl) {
+      column-count: 2;
+    }
+  }
+
+  .right {
+      align-content: right;
+      align-items: right;
+  }
+
+  .small-text {
+      font-size: small;
+  }

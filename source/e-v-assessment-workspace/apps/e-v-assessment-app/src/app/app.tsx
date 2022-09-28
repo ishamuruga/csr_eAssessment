@@ -1,12 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//import styles from './app.module.css';
+import  './app.css';
 //import NxWelcome from './nx-welcome';
 //import {LibAuth} from '@e-v-assessment-workspace/lib-auth';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './components/auth/login';
 import Landing from './components/modules/landing/landing';
 
-import { Navbar } from '@e-v-assessment-workspace/lib-auth';
+import { Navbar, Sidebar } from '@e-v-assessment-workspace/lib-auth';
 
 //import { library } from '@fortawesome/fontawesome-svg-core'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,8 +23,6 @@ import AddCecData from './components/modules/cec/add-cec-data';
 export function App() {
   return (
     <div>
-      
-      
       <Router>
         {/* <ul>
           <li>
@@ -34,15 +32,20 @@ export function App() {
             <Link to="/landing">Landing</Link>
           </li>
         </ul> */}
-       
-        
-       
-        <Navbar></Navbar> 
-        <Routes>
-          <Route path="/" element={<Login />}></Route>
-          <Route path="/landing" element={<Landing />}></Route>
-          <Route path="/addcec" element={<AddCecData />}></Route>
-        </Routes>
+        {/* className="col-md-9 ml-sm-auto col-lg-10 px-md-4" */}
+        <Navbar></Navbar>
+        <div>
+          <Sidebar></Sidebar>
+          <main role="main" >
+            <div>
+              <Routes>
+                <Route path="/" element={<Login />}></Route>
+                <Route path="/landing" element={<Landing />}></Route>
+                <Route path="/addcec" element={<AddCecData />}></Route>
+              </Routes>
+            </div>
+          </main>
+        </div>
       </Router>
     </div>
   );
